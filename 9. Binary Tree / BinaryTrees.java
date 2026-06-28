@@ -23,7 +23,11 @@ public class BinaryTrees{
             if(nodes[idx] == -1){
                 return null;
             }
+            
             Node newNode = new Node(nodes[idx]);
+            
+            System.out.print(newNode.data + ", ");     // Data of every new node
+            // Insert
             newNode.left = buildTree(nodes);
             newNode.right = buildTree(nodes);
             return newNode;
@@ -34,6 +38,7 @@ public class BinaryTrees{
             if(root == null){
                 return ;
             }
+            // Root - Left - Right
             System.out.print(root.data +", ");
             preOrder(root.left);
             preOrder(root.right);
@@ -44,6 +49,7 @@ public class BinaryTrees{
             if(root == null){
                 return ;
             }
+            // Left - Root - Right
             inOrder(root.left);
             System.out.print(root.data + ", ");
             inOrder(root.right);
@@ -54,6 +60,7 @@ public class BinaryTrees{
             if(root == null){
                 return ;
             }
+            // Left - Right - Root
             postOrder(root.left);
             postOrder(root.right);
             System.out.print(root.data + ", ");
@@ -96,7 +103,7 @@ public class BinaryTrees{
             }
             int leftNodes = countOfNodes(root.left);
             int rightNodes = countOfNodes(root.right);
-            
+            // +1 is root node
             return leftNodes + rightNodes + 1;
         }
         
@@ -105,6 +112,7 @@ public class BinaryTrees{
             if(root == null){
                 return 0;
             }
+            System.out.print(root.data + " + ");     // Every Node Data
             int leftSum = sumOfNodes(root.left);
             int rightSum = sumOfNodes(root.right);
             
@@ -167,7 +175,11 @@ public class BinaryTrees{
     public static void main(String[] args) {
         int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         BT tree = new BT();
+        
+        System.out.print("Insert Order : ");
         Node root = tree.buildTree(nodes);
+        
+        System.out.println();
         System.out.println(root.data + " -> Root Node");
         
         tree.preOrder(root);
