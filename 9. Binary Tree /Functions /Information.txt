@@ -2,6 +2,6 @@
 
     This functions are not contain implementation & creation of binary tree so it can not directly copy-pest and runnable function.
 
--    To run this function you can use creation.java file and then use all functions one by one.
+-    To run this function you can use (creation.java) file and then use all functions one by one.
 
--    Also you see BinaryTrees.java file that contains all functions & whole code that directly run.
+-    Also you see (BinaryTrees.java) file that contains all functions & whole code that directly run.
