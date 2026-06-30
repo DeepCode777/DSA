@@ -53,7 +53,8 @@ public class BST
             return search(root.right, num);
         }
     }
-        
+    
+    // Delete Node From BST
     public static Node delete(Node root, int val){
         // Search process
         if(root == null){
@@ -86,9 +87,10 @@ public class BST
         }
         return root;
     }
-        
+    
+    // Find Inorder Successor
     public static Node inOrderSucessor(Node root){
-        // Root never null come in this function - already check
+        // null Root never come in this function - already check
         while(root.left != null){
             root = root.left;
         }
