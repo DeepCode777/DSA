@@ -1,0 +1,15 @@
+    // Search
+    public static boolean search(Node root, int num){
+        if(root == null){
+            return false;
+        }
+        if(root.data == num){
+            return true ;
+        }         // root > num => exist in left subtree
+        else if (root.data > num){
+            return search(root.left, num);
+        }else{
+             // root < num => exist in right subtree 
+            return search(root.right, num);
+        }
+    }
