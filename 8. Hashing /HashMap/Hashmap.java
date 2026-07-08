@@ -6,31 +6,55 @@ public class Hashmap{
         public class Node{
             K key;
             V value;
-            
+
             public Node(K key, V value){
                 this.key = key;
                 this.value = value;
-                
+
             }
         }
         private int n;     // Nodes
         private int N;     // Array Elements
         private LinkedList<Node> array[];     // LL typs of Array
-        
+
         public HashMap(int size){
             this.N = size;
             this.array = new LinkedList[size]; 
-            
+
             // Empty LL Node On Every Elementss of array
             for(int i=0; i<size; i++){
                 this.array[i] = new LinkedList<>();     // HashMap - st
             }
         }
-        
+
         // Methods
         
+        //Finding Array Index
+        public int hashFunction(K key){
+          int ai = key.hashCode();
+          return Math.abs(ai) % N;
+        }
+        
+        // Add Pair In HashMap
+        public void put(K key, V value){
+          int ai = hashFunction(key);
+          int li = searchLL(key, ai);
+          
+          if(li == -1){
+            array[ai].add(new Node(key, value);// add neew node
+            n++;
+          }else{
+            Node node = array[ai].get(li);
+            node.value = value; // update exiting node value
+          }
+          double lemda = (double)n/N;
+          if(lemda > 2.0){
+            rehash();   //Need new Bigger HashMap
+          }
+        }
+
     }
     public static void main(String[] args) {
-        
+
     }
 }
