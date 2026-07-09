@@ -84,8 +84,34 @@ public class Hashmap{
           }
         }
         
+        // get key(position) of LL node
         public int getKey(K key){
+            int ai = hashFunction(key);
+            int li = searchLL(key, ai);
             
+            if(li == -1){
+                return null;    // key not exist
+            }else{    // key exist
+                Node node = array[ai].get(li);
+                return node.key;
+            }
+        }
+        
+        // take Set of keys
+        public ArrayList<K> keySet(){
+            ArrayList<K,V> keys = new ArrayList<>();    // new arrayList
+            
+            // treves on array
+            for(int i=0; i<array.length; i++){
+                // treves on LinkedList
+                LinkedList<Node> ll = array[i];
+                for(int j=0; j<ll.size(); j++){
+                    // get node access for key's
+                    Node node = ll.get(j);
+                    keys.add(node.key);    // add keys in ArrayList
+                }
+            }
+            return keys;
         }
 
     }
