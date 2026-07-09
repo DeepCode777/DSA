@@ -35,6 +35,37 @@ public class Hashmap{
           return Math.abs(ai) % N;
         }
         
+        // Finding LinkedList index
+        public int searchLL(K key, int ai){
+            LinkedList<Node> ll = array[ai];
+            
+            for(int i=0; i<ll.size(); i++){
+                if(ll.get(i).key == key){
+                    return i; // li
+                }
+            }
+            return -1;
+        }
+        
+        // Rehashing - Double Size Array For more Data
+        public void rehash(){
+            LinkedList<Node> oldarray = array;
+            array = new array[N*2];    // New size
+            // add LL on every ele of new array
+            for(int i=0; i<N*2; i++){
+                array[i] = new LinkedList<>();
+            }
+            
+            // Tranfer Oldarray to new array
+            for(int i=0; i<oldarray.length; i++){
+                LinkedList<Node> list = oldarray[i];
+                for(int j=0; j<list.size(); j++){
+                    Node node = ll.get(j);
+                    put(node.key, node.value);
+                }
+            }
+        }
+        
         // Add Pair In HashMap
         public void put(K key, V value){
           int ai = hashFunction(key);
@@ -51,6 +82,10 @@ public class Hashmap{
           if(lemda > 2.0){
             rehash();   //Need new Bigger HashMap
           }
+        }
+        
+        public int getKey(K key){
+            
         }
 
     }
