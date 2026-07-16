@@ -31,8 +31,8 @@ public class Hashmap{
         
         //Finding Array Index
         public int hashFunction(K key){
-          int ai = key.hashCode();
-          return Math.abs(ai) % N;
+          int ai = key.hashCode();  // can return positive or nagative number (abs for positive number
+          return Math.abs(ai) % N;  // 0 to size fix range with basic math
         }
         
         // Finding LinkedList index
@@ -49,6 +49,7 @@ public class Hashmap{
         
         // Rehashing - Double Size Array For more Data
         public void rehash(){
+            // copy of array in oldarray
             LinkedList<Node>[] oldarray = array;
             LinkedList<Node>[] array = new LinkedList[N*2];    // New size
             // add LL on every ele of new array
@@ -72,7 +73,7 @@ public class Hashmap{
           int li = searchLL(key, ai);
           
           if(li == -1){
-            array[ai].add(new Node(key, value);// add neew node
+            array[ai].add(new Node(key, value);// add neew node in array
             n++; // increase Number Of node
           }else{
             Node node = array[ai].get(li);
