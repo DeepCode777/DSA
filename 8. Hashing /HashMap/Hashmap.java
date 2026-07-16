@@ -2,7 +2,7 @@ import java.util.*;
 // Implications Of HashMap In Java
 
 public class Hashmap{
-    public class HashMap<K,V>{     // Generics
+    public static class HashMap<K,V>{     // Generics
         public class Node{
             K key;
             V value;
@@ -40,7 +40,7 @@ public class Hashmap{
             LinkedList<Node> ll = array[ai];
             
             for(int i=0; i<ll.size(); i++){
-                if(ll.get(i).key == key){
+                if(ll.get(i).key.equals(key)){
                     return i; // li
                 }
             }
@@ -50,7 +50,7 @@ public class Hashmap{
         // Rehashing - Double Size Array For more Data
         public void rehash(){
             LinkedList<Node> oldarray = array;
-            array = new array[N*2];    // New size
+            LinkedList<Node>[] array = new LinkedList[N*2];    // New size
             // add LL on every ele of new array
             for(int i=0; i<N*2; i++){
                 array[i] = new LinkedList<>();
@@ -85,7 +85,7 @@ public class Hashmap{
         }
         
         // get key(position) of LL node
-        public int getKey(K key){
+        public K getKey(K key){
             int ai = hashFunction(key);
             int li = searchLL(key, ai);
             
@@ -99,7 +99,7 @@ public class Hashmap{
         
         // take Set of keys
         public ArrayList<K> keySet(){
-            ArrayList<K,V> keys = new ArrayList<>();    // new arrayList
+            ArrayList<K> keys = new ArrayList<>();    // new arrayList
             
             // treves on array
             for(int i=0; i<array.length; i++){
