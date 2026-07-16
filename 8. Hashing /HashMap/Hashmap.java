@@ -132,6 +132,17 @@ public class Hashmap{
             return n == 0;     // true
         }
 
+        // check key contain or not
+        public boolean containKey(K key){
+            int ai = hashFunction(key);
+            int li = searchLL(key, ai);
+                
+            if(li == -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
 
     }
     public static void main(String[] args) {
