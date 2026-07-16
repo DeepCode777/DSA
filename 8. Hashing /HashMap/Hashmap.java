@@ -114,7 +114,8 @@ public class Hashmap{
             return keys;
         }
 
-      public V remove(K key){
+        // Delete Node in HashMap
+        public V remove(K key){
             int ai = hashFunction(key);
             int li = searchLL(key, ai);
                 if(li == -1){
@@ -126,7 +127,11 @@ public class Hashmap{
                 }
         }
       
-      
+        // to check is empty or not
+        public boolean isEmpty(){
+            return n == 0;     // true
+        }
+
 
     }
     public static void main(String[] args) {
