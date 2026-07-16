@@ -114,6 +114,20 @@ public class Hashmap{
             return keys;
         }
 
+      public V remove(K key){
+            int ai = hashFunction(key);
+            int li = searchLL(key, ai);
+                if(li == -1){
+                    return null;
+                }else{
+                    Node node = array[ai].remove(li);
+                    n--;
+                    return node.value;
+                }
+        }
+      
+      
+
     }
     public static void main(String[] args) {
 
