@@ -49,7 +49,7 @@ public class Hashmap{
         
         // Rehashing - Double Size Array For more Data
         public void rehash(){
-            LinkedList<Node> oldarray = array;
+            LinkedList<Node>[] oldarray = array;
             LinkedList<Node>[] array = new LinkedList[N*2];    // New size
             // add LL on every ele of new array
             for(int i=0; i<N*2; i++){
@@ -60,7 +60,7 @@ public class Hashmap{
             for(int i=0; i<oldarray.length; i++){
                 LinkedList<Node> list = oldarray[i];
                 for(int j=0; j<list.size(); j++){
-                    Node node = ll.get(j);
+                    Node node = list.get(j);
                     put(node.key, node.value);
                 }
             }
@@ -73,7 +73,7 @@ public class Hashmap{
           
           if(li == -1){
             array[ai].add(new Node(key, value);// add neew node
-            n++;
+            n++; // increase Number Of node
           }else{
             Node node = array[ai].get(li);
             node.value = value; // update exiting node value
@@ -121,8 +121,8 @@ public class Hashmap{
                 if(li == -1){
                     return null;
                 }else{
-                    Node node = array[ai].remove(li);
-                    n--;
+                    Node node = array[ai].remove(li);    // delete node
+                    n--;    // decrease number of node
                     return node.value;
                 }
         }
