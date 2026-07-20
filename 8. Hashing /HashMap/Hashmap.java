@@ -147,6 +147,11 @@ public class Hashmap{
 
     }
     public static void main(String[] args) {
-
+        HashMaps<String,Integer> map = new HashMaps<>();
+        map.put("India", 190);
+        map.put("China", 200);
+        map.put("USA", 70);
+        map.put("UK", 50);
+        System.out.println(map.remove("China"));
     }
 }
