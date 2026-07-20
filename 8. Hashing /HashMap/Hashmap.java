@@ -1,157 +1,172 @@
 import java.util.*;
-// Implications Of HashMap In Java
 
-public class Hashmap{
-    public static class HashMap<K,V>{     // Generics
-        public class Node{
+// Implementation Of HashMap In Java
+
+public class Hashmap {
+
+    public static class HashMaps<K, V> {     // Generics
+
+        public class Node {
             K key;
             V value;
 
-            public Node(K key, V value){
+            public Node(K key, V value) {
                 this.key = key;
                 this.value = value;
-
             }
         }
+
         private int n;     // Nodes
         private int N;     // Array Elements
-        private LinkedList<Node> array[];     // LL typs of Array
+        private LinkedList<Node> array[];     // LinkedList type Array
 
-        public HashMap(int size){
+        @SuppressWarnings("unchecked")
+        public HashMaps(int size) {
             this.N = size;
-            this.array = new LinkedList[size]; 
+            this.array = new LinkedList[size];
 
-            // Empty LL Node On Every Elementss of array
-            for(int i=0; i<size; i++){
-                this.array[i] = new LinkedList<>();     // HashMap - st
+            // Empty LinkedList Node on every element of array
+            for (int i = 0; i < size; i++) {
+                this.array[i] = new LinkedList<>();
             }
         }
 
         // Methods
-        
-        //Finding Array Index
-        public int hashFunction(K key){
-          int ai = key.hashCode();  // can return positive or nagative number (abs for positive number
-          return Math.abs(ai) % N;  // 0 to size fix range with basic math
+
+        // Finding Array Index
+        public int hashFunction(K key) {
+            int ai = key.hashCode();
+            return Math.abs(ai) % N;
         }
-        
-        // Finding LinkedList index
-        public int searchLL(K key, int ai){
+
+        // Finding LinkedList Index
+        public int searchLL(K key, int ai) {
             LinkedList<Node> ll = array[ai];
-            
-            for(int i=0; i<ll.size(); i++){
-                if(ll.get(i).key.equals(key)){
+
+            for (int i = 0; i < ll.size(); i++) {
+                if (ll.get(i).key.equals(key)) {
                     return i; // li
                 }
             }
             return -1;
         }
-        
-        // Rehashing - Double Size Array For more Data
-        public void rehash(){
-            // copy of array in oldarray
-            LinkedList<Node>[] oldarray = array;
-            LinkedList<Node>[] array = new LinkedList[N*2];    // New size
-            // add LL on every ele of new array
-            for(int i=0; i<N*2; i++){
+
+        // Rehashing - Double Size Array for more Data
+        @SuppressWarnings("unchecked")
+        public void rehash() {
+            LinkedList<Node> oldarray[] = array;
+
+            array = new LinkedList[N * 2];
+            N = N * 2;
+
+            // Add LinkedList on every element of new array
+            for (int i = 0; i < array.length; i++) {
                 array[i] = new LinkedList<>();
             }
-            
-            // Tranfer Oldarray to new array
-            for(int i=0; i<oldarray.length; i++){
+
+            // Transfer old array to new array
+            for (int i = 0; i < oldarray.length; i++) {
                 LinkedList<Node> list = oldarray[i];
-                for(int j=0; j<list.size(); j++){
+
+                for (int j = 0; j < list.size(); j++) {
                     Node node = list.get(j);
                     put(node.key, node.value);
                 }
             }
         }
-        
+
         // Add Pair In HashMap
-        public void put(K key, V value){
-          int ai = hashFunction(key);
-          int li = searchLL(key, ai);
-          
-          if(li == -1){
-            array[ai].add(new Node(key, value);// add neew node in array
-            n++; // increase Number Of node
-          }else{
-            Node node = array[ai].get(li);
-            node.value = value; // update exiting node value
-          }
-          double lemda = (double)n/N;
-          if(lemda > 2.0){
-            rehash();   //Need new Bigger HashMap
-          }
-        }
-        
-        // get key(position) of LL node
-        public K getKey(K key){
+        public void put(K key, V value) {
             int ai = hashFunction(key);
             int li = searchLL(key, ai);
-            
-            if(li == -1){
-                return null;    // key not exist
-            }else{    // key exist
+
+            if (li == -1) {
+                array[ai].add(new Node(key, value)); // Add new node
+                n++;
+            } else {
+                Node node = array[ai].get(li);
+                node.value = value; // Update existing node value
+            }
+
+            double lemda = (double) n / N;
+
+            if (lemda > 2.0) {
+                rehash(); // Need new Bigger HashMap
+            }
+        }
+
+        // Get value using key
+        public K getKey(K key) {
+            int ai = hashFunction(key);
+            int li = searchLL(key, ai);
+
+            if (li == -1) {
+                return null; // Key not exist
+            } else {
                 Node node = array[ai].get(li);
                 return node.key;
             }
         }
-        
-        // take Set of keys
-        public ArrayList<K> keySet(){
-            ArrayList<K> keys = new ArrayList<>();    // new arrayList
-            
-            // treves on array
-            for(int i=0; i<array.length; i++){
-                // treves on LinkedList
+
+        // Take set of keys
+        public ArrayList<K> keySet() {
+            ArrayList<K> keys = new ArrayList<>();
+
+            // Traverse array
+            for (int i = 0; i < array.length; i++) {
+
+                // Traverse LinkedList
                 LinkedList<Node> ll = array[i];
-                for(int j=0; j<ll.size(); j++){
-                    // get node access for key's
+
+                for (int j = 0; j < ll.size(); j++) {
+
+                    // Get node access for keys
                     Node node = ll.get(j);
-                    keys.add(node.key);    // add keys in ArrayList
+                    keys.add(node.key);
                 }
             }
+
             return keys;
         }
 
-        // Delete Node in HashMap
-        public V remove(K key){
+        public V remove(K key) {
             int ai = hashFunction(key);
             int li = searchLL(key, ai);
-                if(li == -1){
-                    return null;
-                }else{
-                    Node node = array[ai].remove(li);    // delete node
-                    n--;    // decrease number of node
-                    return node.value;
-                }
-        }
-      
-        // to check is empty or not
-        public boolean isEmpty(){
-            return n == 0;     // true
-        }
 
-        // check key contain or not
-        public boolean containKey(K key){
-            int ai = hashFunction(key);
-            int li = searchLL(key, ai);
-                
-            if(li == -1){
-                return false;
-            }else{
-                return true;
+            if (li == -1) {
+                return null;
+            } else {
+                Node node = array[ai].remove(li);
+                n--;
+                return node.value;
             }
         }
 
+        public boolean isEmpty() {
+            return n == 0;
+        }
+
+        public boolean containsKey(K key) {
+            int ai = hashFunction(key);
+            int li = searchLL(key, ai);
+
+            if (li == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
+
     public static void main(String[] args) {
-        HashMaps<String,Integer> map = new HashMaps<>();
+
+        HashMaps<String, Integer> map = new HashMaps<>(4);
+
         map.put("India", 190);
         map.put("China", 200);
         map.put("USA", 70);
         map.put("UK", 50);
+
         System.out.println(map.remove("China"));
     }
 }
