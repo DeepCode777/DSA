@@ -14,7 +14,7 @@ public class Tries{
     static Node root = new Node(); // root empty - Never change
 
     public static void inserts(String word){
-        node curr = root;
+        Node curr = root;
         
         // trevers on every letter of word
         for(int i=0; i<word.length(); i++){
@@ -29,9 +29,30 @@ public class Tries{
                 // mark last letter of word
                 curr.element[idx].eow = true;
             }
-            // update root for next letter
+            // update curr for next letter
             curr = curr.element[idx];
           }
+    }
+    
+    public static boolean search(String word){
+        Node curr = root;
+        
+        for(int i=0; i<word.length(); i++){
+            int idx = word.charAt(i) - 'a' ;     // index letter
+            
+            // letter (node) note exist
+            if(curr.element[idx] == null){
+                return false ;
+            }
+            
+            // last letter but not EOF
+            if(i == word.length()-1 && curr.element[idx].eow == false){
+                return false ;
+            }
+            // update curr for next element
+            curr = curr.element[idx]; 
+        }
+        return true ;        // everything Okey
     }
 
     public static void main (String[] args) {
@@ -39,5 +60,10 @@ public class Tries{
         for(int i=0; i<words.length; i++){
             inserts(words[i]);
         }
+        
+        System.out.println( "the : "+search("the"));
+        System.out.println( "three :" +search("three"));
+        System.out.println( "an : " +search("an"));
+        System.out.println( "there : " +search("there"));
     }
 }
