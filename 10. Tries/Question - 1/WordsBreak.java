@@ -59,10 +59,13 @@ public class WordsBreak{
         if(key.length() == 0){
             return true;
         }
+
+        // break string in every letters
         for(int i=1; i<=key.length(); i++){
-            String first = key.substring(0,i);
-            String second = key.substring(i);
-            
+            String first = key.substring(0,i);    // frist part 0 to i
+            String second = key.substring(i);    // second part i to end of string
+
+            // check first or second part both are true
             if(search(first) && wordBreak(second)){
                 return true;
             }
@@ -79,7 +82,7 @@ public class WordsBreak{
             inserts(words[i]);
         }
         
-        System.out.println(wordBreak(key));
-        System.out.println(wordBreak(key2));
+        System.out.println(wordBreak(key));    // true 
+        System.out.println(wordBreak(key2));    // false
     }
 }
