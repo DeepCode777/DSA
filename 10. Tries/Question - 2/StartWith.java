@@ -13,6 +13,28 @@ public class StartWith{
     }
     static Node root = new Node(); // root empty - Never change
 
+
+    public static void inserts(String word){
+        Node curr = root;
+
+        // trevers on every letter of word
+        for(int i=0; i<word.length(); i++){
+            int idx = word.charAt(i) - 'a';   // letter index
+
+            if(curr.element[idx] == null){
+                // add new node here
+                curr.element[idx] = new Node();
+            }
+
+            if(i == word.length()-1){
+                // mark last letter of word
+                curr.element[idx].eow = true;
+            }
+            // update curr for next letter
+            curr = curr.element[idx];
+          }
+    }
+
     public static void main (String[] args) {
         String[] words = {"the", "a", "there", "their", "any", "i", "like", "sam", "samsung"};
     }
