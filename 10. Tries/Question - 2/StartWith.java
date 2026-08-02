@@ -61,5 +61,4 @@ public class StartWith{
         System.out.println(startWith(key));    // true 
         System.out.println(startWith(key2));    // false
     }
-    }
 }
