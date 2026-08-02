@@ -35,7 +35,31 @@ public class StartWith{
           }
     }
 
+    public static boolean startWith(String prefix){
+        Node curr = root;
+        for(int i=0; i<prefix.length(); i++){
+            int idx = prefix.charAt(i) - 'a';
+            
+            if(curr.element[idx] == null){
+                return false ;    // character not exist
+            }
+            curr = curr.element[idx];
+        }
+        return true ;
+    }
+
     public static void main (String[] args) {
         String[] words = {"the", "a", "there", "their", "any", "i", "like", "sam", "samsung"};
+
+        String key = "the";
+        String key2 = "im" ;
+
+        for(int i=0; i<words.length; i++){
+            inserts(words[i]);
+        }
+
+        System.out.println(startWith(key));    // true 
+        System.out.println(startWith(key2));    // false
+    }
     }
 }
