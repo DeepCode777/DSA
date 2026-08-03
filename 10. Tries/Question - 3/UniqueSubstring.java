@@ -13,7 +13,7 @@ public class UniqeSubstring{
     }
     static Node root = new Node(); // root empty - Never change
 
-    // insert into tries
+
     public static void inserts(String word){
         Node curr = root;
 
@@ -34,11 +34,27 @@ public class UniqeSubstring{
             curr = curr.element[idx];
           }
     }
+
+    // Count Number Of Nodes
+    public  static int countNode(Node root){
+        if(root == null){
+            return 0;
+        }
+        int cout = 0;
+        for(int i=0; i<26; i++){
+            if(root.element[i] != null){
+                cout += countNode(root.element[i]);
+            }
+        }
+        return cout+1;
+    }
+
     public static void main (String[] args) {
         String word = "apple";
-
-        for(int i=0; i<words.length; i++){
-            inserts(words[i]);
+        for(int i=0; i<word.length(); i++){
+            String postfix = word.substring(i);
+            inserts(postfix);
         }
+        System.out.println("Uniqe Sub Strings in word are : " +countNode(root));
     }
 }
